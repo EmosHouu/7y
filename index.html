@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>七週年快樂</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeInDown 1s ease;
+    }
+
+    header h1 {
+      font-size: 3.2em;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1s ease forwards;
+    }
+
+    section:nth-of-type(even) {
+      background: #fffafc;
+      border-radius: 12px;
+    }
+
+    .memory img {
+      width: 50%;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .memory p {
+      font-size: 1.2em;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* 情書隱藏與顯示 */
+    .confession {
+      background: #ffeef1;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.5em;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transition: opacity 1s ease, max-height 1s ease, visibility 0s linear 1s;
+    }
+
+    .confession.show {
+      opacity: 1;
+      max-height: 1000px;
+      visibility: visible;
+      position: static;
+      transition-delay: 0s;
+    }
+
+    .question {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .quiz {
+      margin-bottom: 30px;
+    }
+
+    .answers button {
+      display: block;
+      margin: 8px 0;
+      padding: 12px;
+      width: 100%;
+      background: #ffdee9;
+      border: none;
+      border-radius: 12px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .answers button:hover {
+      background: #ffc6d9;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .result.correct {
+      opacity: 1;
+      animation: popScale 0.6s ease-out;
+      color: green;
+    }
+
+    .result.wrong {
+      opacity: 1;
+      color: red;
+    }
+
+    @keyframes popScale {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: #ffe4ec;
+    }
+
+    .puzzle-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .puzzle {
+      display: flex;
+      flex-wrap: wrap;
+      width: 300px;
+      position: relative;
+    }
+
+    .puzzle-piece {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      background-size: 300px 300px;
+      cursor: move;
+    }
+
+    .puzzle-message {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      color: #e91e63;
+      display: none;
+      animation: popIn 0.6s ease-out;
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.5) translate(-50%, -50%);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>七週年快樂</h1>
+    <p>感謝妳七年來的陪伴與愛 ❤️</p>
+  </header>
+
+  <section>
+    <h2>我們的回憶時光機</h2>
+    <div class="memory">
+      <img src="./fish.jpg" alt="第一年回憶">
+      <p>環島時，我們第一次來到漁光島，那天的羞澀與悸動，我永遠記得</p>
+    </div>
+    <div class="memory">
+      <p>如今再次踏上這片海岸，我更懂你，也更深愛你。這裡見證了我們的愛情，未來願與你攜手寫下更多回憶。</p>
+    </div>
+  </section>
+
+  <section class="game-section">
+    <h2>❤️ 愛的小測驗 ❤️</h2>
+    <!-- 第一題 -->
+    <div class="quiz">
+      <div class="question">我們環島第一站去哪裡？</div>
+      <div class="answers">
+        <button onclick="checkAnswer(1, false)">台南</button>
+        <button onclick="checkAnswer(1, true)">台中</button>
+        <button onclick="checkAnswer(1, false)">高雄</button>
+      </div>
+      <div id="result1" class="result"></div>
+    </div>
+    <!-- 第二題 -->
+    <div class="quiz">
+      <div class="question">我們一週年、二週年的紀念大餐？</div>
+      <div class="answers">
+        <button onclick="checkAnswer(2, false)">馬辣</button>
+        <button onclick="checkAnswer(2, true)">台中</button>
+        <button onclick="checkAnswer(2, false)">泰式場</button>
+      </div>
+      <div id="result2" class="result"></div>
+    </div>
+    <!-- 第三題 -->
+    <div class="quiz">
+      <div class="question">我們第一次出國是去哪裡？</div>
+      <div class="answers">
+        <button onclick="checkAnswer(3, false)">北海道</button>
+        <button onclick="checkAnswer(3, true)">京都</button>
+        <button onclick="checkAnswer(3, false)">大阪</button>
+      </div>
+      <div id="result3" class="result"></div>
+    </div>
+  </section>
+
+  <section class="puzzle-section">
+    <h2>🧩 拼出我們的回憶 🧩</h2>
+    <p>請完成以下拼圖，才能看到給妳的情書！</p>
+    <div class="puzzle-row" id="puzzle-wrapper"></div>
+  </section>
+
+  <section class="confession" id="love-letter">
+    <h2>給妳的一封情書</h2>
+    <p>
+      七年來，我對妳的愛從未減退，反而愈發深沉。
+      謝謝妳一直在我身邊，給我溫暖與力量。
+      願牽妳之手，走過第八年、第九年……直到永遠。
+      “Grow old with me; the best is yet to come.”
+    </p>
+    <!-- QR Code 放置區域 -->
+    <div id="qr-code" style="margin-top:20px;">
+      <p>掃描QR Code，獲得更多驚喜：</p>
+      <!-- 這裡可替換為實際 QR Code 圖片 -->
+      <img src="./QR.jpg" alt="QR Code" style="width:300px; height:200x;" />
+    </div>
+  </section>
+
+  <footer>
+    <p>💖 七週年快樂 💖<br>我永遠愛妳</p>
+  </footer>
+
+  <script>
+    let quizCorrectCount = 0;
+    let quizAnswered = { 1: false, 2: false, 3: false };
+    let puzzlePassed = false;
+    let puzzleCompletedCount = 0;
+    const totalPuzzles = 6;
+    const totalQuiz = 3;
+
+    function revealLoveLetter() {
+      if (quizCorrectCount === totalQuiz && puzzlePassed) {
+        const letter = document.getElementById('love-letter');
+        letter.classList.add('show');
+        setTimeout(() => letter.scrollIntoView({ behavior: 'smooth' }), 300);
+      }
+    }
+
+    function checkAnswer(questionId, correct) {
+      const resultEl = document.getElementById(`result${questionId}`);
+      if (quizAnswered[questionId]) return; // 已回答過
+      quizAnswered[questionId] = true;
+      if (correct) {
+        resultEl.textContent = `答對了！`;
+        resultEl.classList.add('correct');
+        quizCorrectCount++;
+      } else {
+        resultEl.textContent = `答錯囉，再接再厲！`;
+        resultEl.classList.add('wrong');
+      }
+      revealLoveLetter();
+    }
+
+    const images = [
+      './1.jpg', './2.jpg', './3.jpg',
+      './4.jpg', './5.jpg', './6.jpg'
+    ];
+    const wrapper = document.getElementById('puzzle-wrapper');
+
+    images.forEach((imgSrc, index) => {
+      const container = document.createElement('div');
+      container.className = 'puzzle';
+      container.id = `puzzle${index}`;
+
+      const message = document.createElement('div');
+      message.className = 'puzzle-message';
+      message.innerText = `第 ${index + 1} 張完成！好棒 💖`;
+      container.appendChild(message);
+
+      let pieces = [];
+      for (let i = 0; i < 9; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'puzzle-piece';
+        piece.style.backgroundImage = `url(${imgSrc})`;
+        piece.style.backgroundPosition = `-${(i % 3) * 100}px -${Math.floor(i / 3) * 100}px`;
+        piece.setAttribute('draggable', true);
+        piece.dataset.index = i;
+        pieces.push(piece);
+      }
+
+      pieces.sort(() => Math.random() - 0.5);
+      pieces.forEach(p => container.appendChild(p));
+      wrapper.appendChild(container);
+
+      let dragSrc = null;
+      container.addEventListener('dragstart', e => {
+        dragSrc = e.target;
+      });
+
+      container.addEventListener('dragover', e => {
+        e.preventDefault();
+      });
+
+      container.addEventListener('drop', e => {
+        if (e.target.className !== 'puzzle-piece') return;
+        const from = dragSrc;
+        const to = e.target;
+        const temp = document.createElement('div');
+        container.insertBefore(temp, from);
+        container.insertBefore(from, to);
+        container.insertBefore(to, temp);
+        container.removeChild(temp);
+        checkPuzzleCompletion(container);
+      });
+
+      function checkPuzzleCompletion(container) {
+        const pieces = Array.from(container.querySelectorAll('.puzzle-piece'));
+        const correct = pieces.every((piece, i) => parseInt(piece.dataset.index) === i);
+        if (correct) {
+          const msg = container.querySelector('.puzzle-message');
+          msg.style.display = 'block';
+          msg.classList.add('popIn');
+          setTimeout(() => {
+            msg.style.display = 'none';
+          }, 1500);
+          puzzleCompletedCount++;
+          if (puzzleCompletedCount === totalPuzzles) {
+            puzzlePassed = true;
+            revealLoveLetter();
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+
+</html>
